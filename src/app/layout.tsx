@@ -1,7 +1,6 @@
-
-import type { Metadata } from "next";
-import { AppProviders } from "@/components/app/AppProviders";
 import { AppContainer } from "@/components/app/AppContainer";
+import { AppProviders } from "@/components/app/AppProviders";
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Application Title",
@@ -19,4 +18,3 @@ export default function RootLayout({
     </AppProviders>
   );
 }
-  
