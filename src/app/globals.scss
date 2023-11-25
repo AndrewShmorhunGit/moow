@@ -1,0 +1,105 @@
+:root {
+  --color-background-light: #f3f3f3;
+  --color-background-dark: #1a1a1a;
+  --color-text-light: #1a1a1a;
+  --color-text-dark: #e6e6e6;
+}
+
+@font-face {
+  font-family: "CalSans-SemiBold";
+  src: url("../assets/fonts/CalSans-SemiBold.ttf") format("truetype"),
+    url("../assets/fonts/CalSans-SemiBold.woff") format("woff"),
+    url("../assets/fonts/CalSans-SemiBold.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("../assets/fonts/Inter-Bold.ttf") format("truetype");
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("../assets/fonts/Inter-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+.light-theme {
+  background-color: var(--color-background-light);
+  color: var(--color-text-light);
+}
+
+.dark-theme {
+  background-color: var(--color-background-dark);
+  color: var(--color-text-dark);
+}
+
+body {
+  max-width: 1240px;
+  max-height: 100vh;
+  margin: 0 auto;
+  font-family: "Inter", sans-serif;
+  box-sizing: border-box;
+  // margin: 0;
+  padding: 0;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.space-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.absolute {
+  position: absolute;
+}
+
+.relative {
+  position: relative;
+}
+
+.absolute-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.gap {
+  gap: 0.4rem;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+}
+
+body.scroll-bar::-webkit-scrollbar {
+  width: 0.4rem;
+  height: 1rem;
+}
+
+body.scroll-bar::-webkit-scrollbar-track {
+  background: rgb(87, 149, 167, 0.2);
+  border-radius: 1rem;
+}
+
+body.scroll-bar::-webkit-scrollbar-thumb {
+  background: rgb(87, 149, 167, 0.6);
+  opacity: 50%;
+  border-radius: 1rem;
+}

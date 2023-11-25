@@ -1,5 +1,4 @@
-
-import { prisma } from "@/utils/db";
+import { prisma } from "@/utils/prisma/prisma";
 import { currentUser } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
 
@@ -21,9 +20,8 @@ export default async function Auth() {
         },
       });
     }
-    redirect("/main page");
+    redirect("/delivery");
   }
 
   redirect("/");
 }
-  

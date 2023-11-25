@@ -1,0 +1,70 @@
+h1,
+h2,
+h3 {
+  font-family: "CalSans-SemiBold", sans-serif;
+}
+.features-container {
+  padding: 2rem;
+  background-color: #f8fafc;
+  color: #334155;
+
+  .features-header {
+    text-align: center;
+
+    .features-title {
+      font-size: 3rem;
+    }
+
+    .features-description {
+      max-width: 85%;
+      margin: 0 auto;
+      font-size: 1rem;
+    }
+  }
+
+  .features-grid {
+    padding: 1rem 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    max-width: 64rem;
+    margin: 0 auto;
+
+    @media (max-width: 768px) {
+      grid-template-columns: repeat(2, 1fr); // 2 columns on medium screens
+    }
+
+    // Adjust for small-sized screens
+    @media (max-width: 480px) {
+      grid-template-columns: 1fr; // 1 column on small screens
+    }
+    .feature-item {
+      background-color: #ffffff;
+      border-radius: 0.5rem;
+      padding: 2rem;
+
+      .feature-icon {
+        // Define icon styles...
+      }
+
+      .feature-heading {
+        font-weight: bold;
+      }
+
+      .feature-text {
+        font-size: 0.875rem;
+        color: #64748b;
+      }
+    }
+  }
+
+  .additional-info {
+    text-align: center;
+    max-width: 58rem;
+    margin: 0 auto;
+
+    .info-text {
+      // Styles for the additional info text
+    }
+  }
+}
