@@ -1,4 +1,10 @@
 import * as React from "react";
+// import { Map } from "@/components/map/Map";
+import dynamic from "next/dynamic";
+
+const MapWithNoSSR = dynamic(() => import("@/components/map/Map"), {
+  ssr: false,
+});
 
 export function MainComponent() {
   return (
@@ -1836,7 +1842,10 @@ export function MainComponent() {
                   </div>
                 </div>
               </div>
-              <img
+              <div style={{ padding: "1rem 0", overflow: "hidden" }}>
+                <MapWithNoSSR />
+              </div>
+              {/* <img
                 loading="lazy"
                 srcSet="https://cdn.builder.io/api/v1/image/assets/TEMP/9bf4d96a-0ce3-474b-b0a2-94a19ca546f5?apiKey=ee58232a01b242d2a13bbbde4b7b89e4&width=100 100w, https://cdn.builder.io/api/v1/image/assets/TEMP/9bf4d96a-0ce3-474b-b0a2-94a19ca546f5?apiKey=ee58232a01b242d2a13bbbde4b7b89e4&width=200 200w, https://cdn.builder.io/api/v1/image/assets/TEMP/9bf4d96a-0ce3-474b-b0a2-94a19ca546f5?apiKey=ee58232a01b242d2a13bbbde4b7b89e4&width=400 400w, https://cdn.builder.io/api/v1/image/assets/TEMP/9bf4d96a-0ce3-474b-b0a2-94a19ca546f5?apiKey=ee58232a01b242d2a13bbbde4b7b89e4&width=800 800w, https://cdn.builder.io/api/v1/image/assets/TEMP/9bf4d96a-0ce3-474b-b0a2-94a19ca546f5?apiKey=ee58232a01b242d2a13bbbde4b7b89e4&width=1200 1200w, https://cdn.builder.io/api/v1/image/assets/TEMP/9bf4d96a-0ce3-474b-b0a2-94a19ca546f5?apiKey=ee58232a01b242d2a13bbbde4b7b89e4&width=1600 1600w, https://cdn.builder.io/api/v1/image/assets/TEMP/9bf4d96a-0ce3-474b-b0a2-94a19ca546f5?apiKey=ee58232a01b242d2a13bbbde4b7b89e4&width=2000 2000w, https://cdn.builder.io/api/v1/image/assets/TEMP/9bf4d96a-0ce3-474b-b0a2-94a19ca546f5?apiKey=ee58232a01b242d2a13bbbde4b7b89e4&"
                 style={{
@@ -1851,7 +1860,7 @@ export function MainComponent() {
                   //   maxWidth: "100%",
                   // },
                 }}
-              />
+              /> */}
               <div
                 style={{
                   justifyContent: "space-between",

@@ -5,7 +5,7 @@ import { auth } from "@clerk/nextjs";
 
 export const HeroSection = async () => {
   const { userId } = await auth();
-  const href = userId ? "/delivery" : "/auth";
+  const href = userId ? "/main" : "/auth";
   return (
     <section className="hero-section">
       <div className="hero-container">

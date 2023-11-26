@@ -1,5 +1,5 @@
 import { MainComponent } from "@/components/main/MainComponent";
 
-export default function Delivery() {
+export default function Main() {
   return <MainComponent />;
 }

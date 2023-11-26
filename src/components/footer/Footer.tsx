@@ -1,16 +1,6 @@
-import { TelegramIcon, GithubIcon, LinkedinIcon } from "@/assets/icons/footer";
+import { footerConfig as footer } from "@/config/footer.config";
 
-type FooterData = {
-  link: string;
-  icon: typeof TelegramIcon | typeof LinkedinIcon | typeof GithubIcon;
-};
 export function Footer() {
-  const footer: FooterData[] = [
-    { link: "https://t.me/your_telegram", icon: TelegramIcon },
-    { link: "https://www.linkedin.com/in/your_linkedin", icon: LinkedinIcon },
-    { link: "https://github.com/your_github", icon: GithubIcon },
-  ];
-
   return (
     <footer className={`center`} style={{ padding: "1rem 0" }}>
       {footer.map((item, index) => {

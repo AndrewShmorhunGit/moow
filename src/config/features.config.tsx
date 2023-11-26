@@ -8,7 +8,7 @@ import {
   SqliteIcon,
   TypescriptIcon,
 } from "@/assets/icons/features";
-import { ReactNode, FC } from "react";
+import { FC } from "react";
 
 type IconProps = {
   size?: number;
@@ -19,8 +19,9 @@ type Feature = {
   name: string;
   description: string;
   version?: number;
-  icon: FC<IconProps>; // Using FC (Functional Component) type
+  icon: FC<IconProps>;
 };
+
 export const featuresConfig: Feature[] = [
   {
     name: "Next.js",

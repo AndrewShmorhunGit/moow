@@ -20,7 +20,7 @@ export default async function Auth() {
         },
       });
     }
-    redirect("/delivery");
+    redirect("/main");
   }
 
   redirect("/");

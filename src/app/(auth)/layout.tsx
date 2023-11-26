@@ -23,6 +23,7 @@ export default function RootLayout({
       }}
     >
       <div style={{ position: "fixed", top: "1rem", left: "1rem" }}>
+        {/* Main Logo */}
         <MoowLogo size={92} />
       </div>
       <Link

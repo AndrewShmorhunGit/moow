@@ -1,15 +1,5 @@
-import { Footer } from "@/components/footer/Footer";
-import Navigation from "@/components/navigation/Navigation";
-import { FeaturesSection } from "@/components/sections/features/FeaturesSection";
-import { HeroSection } from "@/components/sections/hero/HeroSection";
+import InitialPage from "@/components/pages/InitialPage";
 
 export default function Home() {
-  return (
-    <main>
-      <Navigation />
-      <HeroSection />
-      <FeaturesSection />
-      <Footer />
-    </main>
-  );
+  return <InitialPage />;
 }
