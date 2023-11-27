@@ -5,6 +5,8 @@
   --color-text-dark: #e6e6e6;
 }
 
+// @import url("https://fonts.googleapis.com/css2?family=Mulish:wght@400;700&display=swap");
+
 @font-face {
   font-family: "CalSans-SemiBold";
   src: url("../assets/fonts/CalSans-SemiBold.ttf") format("truetype"),
@@ -44,7 +46,6 @@ body {
   margin: 0 auto;
   font-family: "Inter", sans-serif;
   box-sizing: border-box;
-  // margin: 0;
   padding: 0;
 }
 
@@ -102,4 +103,44 @@ body.scroll-bar::-webkit-scrollbar-thumb {
   background: rgb(87, 149, 167, 0.6);
   opacity: 50%;
   border-radius: 1rem;
+}
+
+@mixin button-styles {
+  text-align: center;
+  white-space: nowrap;
+  border: none;
+  cursor: pointer;
+  border-radius: 35px;
+  max-width: 100%;
+  padding: 10px 15px;
+  font: 700 16px/20px Mulish, sans-serif;
+  transition: all 0.4s ease;
+
+  @media (max-width: 991px) {
+    white-space: normal;
+  }
+
+  &:hover {
+    box-shadow: 0px 5px 8px 0px rgba(77, 76, 76, 0.2);
+    transform: translateY(-1px);
+  }
+}
+
+.primary-button {
+  @include button-styles;
+  color: var(--purple-600, #665cd1);
+  background-color: var(--purple-100, #f1f0ff);
+  box-shadow: 0px 0px 0px 0px rgba(77, 76, 76, 0.2);
+
+  &:hover {
+    background-color: #d9d8e6;
+  }
+}
+
+.secondary-button {
+  @include button-styles;
+  align-self: center;
+  color: var(--black-100, #ebebeb);
+  background-color: var(--black-600, #171717);
+  box-shadow: 0px 0px 0px 0px rgba(77, 76, 76, 0.8);
 }

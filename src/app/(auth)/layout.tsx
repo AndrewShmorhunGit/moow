@@ -1,4 +1,5 @@
 import { MoowLogo } from "@/assets/logos/MoowLogo";
+import { Spinner } from "@/components/lib/spinner/Spinner";
 import type { Metadata } from "next";
 import Link from "next/link";
 
@@ -39,6 +40,7 @@ export default function RootLayout({
           color: "inherit",
         }}
       >
+        <Spinner />
         &larr; back
       </Link>
       {children}

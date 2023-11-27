@@ -1,9 +1,9 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
+import { GoogleMap, Marker } from "@react-google-maps/api";
 
 const containerStyle = {
-  width: "536px",
+  width: "500px",
   height: "400px",
 };
 
@@ -26,21 +26,19 @@ export const Map: React.FC = () => {
   }
 
   return (
-    <LoadScript googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}>
-      <GoogleMap
-        mapContainerStyle={containerStyle}
-        center={currentLocation}
-        zoom={10}
-      >
-        <Marker
-          position={currentLocation}
-          // icon={{
-          //   url: "./location.svg",
-          //   scaledSize: new window.google.maps.Size(50, 50),
-          // }}
-        />
-      </GoogleMap>
-    </LoadScript>
+    <GoogleMap
+      mapContainerStyle={containerStyle}
+      center={currentLocation}
+      zoom={10}
+    >
+      <Marker
+        position={currentLocation}
+        // icon={{
+        //   url: "./location.svg",
+        //   scaledSize: new window.google.maps.Size(50, 50),
+        // }}
+      />
+    </GoogleMap>
   );
 };
 
