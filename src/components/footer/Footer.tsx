@@ -1,3 +1,4 @@
+"use client";
 import { footerConfig as footer } from "@/config/footer.config";
 
 export function Footer() {

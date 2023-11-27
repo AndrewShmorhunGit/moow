@@ -8,6 +8,20 @@
 // @import url("https://fonts.googleapis.com/css2?family=Mulish:wght@400;700&display=swap");
 
 @font-face {
+  font-family: "Mulish-Bold";
+  src: url("../assets/fonts/Mulish-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Mulish";
+  src: url("../assets/fonts/Mulish-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
   font-family: "CalSans-SemiBold";
   src: url("../assets/fonts/CalSans-SemiBold.ttf") format("truetype"),
     url("../assets/fonts/CalSans-SemiBold.woff") format("woff"),

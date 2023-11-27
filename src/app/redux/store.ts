@@ -1,9 +1,9 @@
 "use client";
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import counterReducer from "./features/counter/counter.slice";
+import orderReducer from "./features/order/order.slice";
 
 export const rootReducer = combineReducers({
-  counter: counterReducer,
+  order: orderReducer,
 });
 
 export function setupStore() {
@@ -16,4 +16,3 @@ export function setupStore() {
 export type RootState = ReturnType<typeof rootReducer>;
 export type AppStore = ReturnType<typeof setupStore>;
 export type AppDispatch = AppStore["dispatch"];
-  

@@ -1,11 +1,64 @@
 "use client ";
-import { imageSrc } from "@/data/src";
+import { setOrder } from "@/app/redux/features/order/order.slice";
 import "./InitialLocationInput.scss";
 import { AutocompleteInput } from "../lib/AutocompleteInput";
+import { useAppDispatch, useAppSelector } from "@/hooks/useAppDispatch";
+import { useEffect, useState } from "react";
+import { changeLocationInOrderLocationsList } from "@/utils/functions";
 
-export function InitialLocationInput() {
+export function InitialLocationForm() {
+  const dispatch = useAppDispatch();
+
+  const initialState = useAppSelector((state) => state.order);
+
+  const { orderDate, orderTime, orderLocations } = initialState;
+
+  const [isForm, setForm] = useState({
+    date: orderDate,
+    time: orderTime,
+    location: orderLocations[0],
+  });
+
+  const handleWorkChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const target = e.target as HTMLInputElement;
+    const newWorkingHours = target.value as string;
+    const hours = +newWorkingHours >= 0 ? +newWorkingHours : 0;
+
+    setForm({
+      ...isForm,
+      location: { ...isForm.location, workingHours: hours },
+    });
+  };
+
+  const handleTimeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const target = e.target as HTMLInputElement;
+    const newTime = target.value as string;
+    setForm({ ...isForm, time: newTime });
+  };
+
+  const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const target = e.target as HTMLInputElement;
+    const newDate = target.value as string;
+    setForm({ ...isForm, date: newDate });
+  };
+
+  useEffect(() => {
+    dispatch(
+      setOrder({
+        ...initialState,
+        orderDate: isForm.date,
+        orderTime: isForm.time,
+        orderLocations: changeLocationInOrderLocationsList(
+          orderLocations,
+          0,
+          isForm.location
+        ),
+      })
+    );
+  }, [isForm]);
+
   return (
-    <div
+    <form
       style={{
         justifyContent: "space-between",
         borderRadius: "10px",
@@ -13,9 +66,7 @@ export function InitialLocationInput() {
         alignSelf: "stretch",
         display: "flex",
         flexDirection: "column",
-        // "@media (max-width: 991px)": {
-        //   maxWidth: "100%",
-        // },
+
         margin: "10px -20px 0 0",
         padding: "15px",
       }}
@@ -24,10 +75,7 @@ export function InitialLocationInput() {
         style={{
           color: "var(--black-500, #262626)",
           whiteSpace: "nowrap",
-          // "@media (max-width: 991px)": {
-          //   maxWidth: "100%",
-          //   whiteSpace: "initial",
-          // },
+
           font: "700 16px/20px Mulish, sans-serif ",
         }}
       >
@@ -38,20 +86,12 @@ export function InitialLocationInput() {
           alignContent: "flex-start",
           flexWrap: "wrap",
           marginTop: "15px",
-          // "@media (max-width: 991px)": {
-          //   maxWidth: "100%",
-          // },
         }}
       >
         <div
           style={{
             gap: "20px",
             display: "flex",
-            // "@media (max-width: 991px)": {
-            //   flexDirection: "column",
-            //   alignItems: "stretch",
-            //   gap: "0px",
-            // },
           }}
         >
           <div
@@ -61,10 +101,6 @@ export function InitialLocationInput() {
               lineHeight: "normal",
               width: "71%",
               marginLeft: "0px",
-              // "@media (max-width: 991px)": {
-              //   width: "100%",
-              //   marginLeft: 0,
-              // },
             }}
           >
             <div
@@ -72,14 +108,12 @@ export function InitialLocationInput() {
                 display: "flex",
                 flexGrow: "1",
                 flexDirection: "column",
-                // "@media (max-width: 991px)": {
-                //   marginTop: "40px",
-                // },
               }}
             >
               <label
                 htmlFor="date"
                 style={{
+                  cursor: "pointer",
                   color: "var(--black-400, #5A5A5A)",
                   font: "500 14px/18px Mulish, sans-serif ",
                 }}
@@ -106,6 +140,8 @@ export function InitialLocationInput() {
                   <input
                     id="date"
                     name="date"
+                    onChange={(e) => handleDateChange(e)}
+                    value={isForm.date}
                     style={{
                       outline: "none",
                       border: "none",
@@ -126,68 +162,8 @@ export function InitialLocationInput() {
                 </div>
               </div>
               <div style={{ marginTop: "15px" }}>
-                <AutocompleteInput id={"addressA"} />
+                <AutocompleteInput id={"A"} />
               </div>
-              {/* <label
-                htmlFor="address"
-                style={{
-                  color: "var(--black-400, #5A5A5A)",
-                  marginTop: "15px",
-                  font: "500 14px/18px Mulish, sans-serif ",
-                }}
-              >
-                Адреса
-              </label>
-              <div
-                style={{
-                  display: "flex",
-                  marginTop: "5px",
-                  paddingRight: "10px",
-                  justifyContent: "space-between",
-                  gap: "3px",
-                }}
-              >
-                <div
-                  style={{
-                    display: "flex",
-                    flexGrow: "1",
-                    flexBasis: "0%",
-                    flexDirection: "column",
-                  }}
-                >
-                  <input
-                    id="address"
-                    type="address"
-                    style={{
-                      outline: "none",
-                      border: "none",
-                      color: "var(--black-500, #262626)",
-                      font: "500 16px/20px Mulish, sans-serif ",
-                    }}
-                  />
-                  <div
-                    style={{
-                      background: "#665CD1",
-
-                      height: "1px",
-                    }}
-                  />
-                </div>
-                <img
-                  loading="lazy"
-                  srcSet={imageSrc}
-                  style={{
-                    transform: "scale(0.9)",
-                    aspectRatio: "1",
-                    objectFit: "contain",
-                    objectPosition: "center",
-                    width: "25px",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    overflow: "hidden",
-                  }}
-                />
-              </div> */}
             </div>
           </div>
           <div
@@ -197,10 +173,6 @@ export function InitialLocationInput() {
               lineHeight: "normal",
               width: "29%",
               marginLeft: "20px",
-              // "@media (max-width: 991px)": {
-              //   width: "100%",
-              //   marginLeft: 0,
-              // },
             }}
           >
             <div
@@ -208,19 +180,15 @@ export function InitialLocationInput() {
                 display: "flex",
                 flexGrow: "1",
                 flexDirection: "column",
-                // "@media (max-width: 991px)": {
-                //   marginTop: "40px",
-                // },
               }}
             >
               <label
                 htmlFor="workA"
                 style={{
+                  cursor: "pointer",
                   color: "var(--black-400, #5A5A5A)",
                   whiteSpace: "nowrap",
-                  // "@media (max-width: 991px)": {
-                  //   whiteSpace: "initial",
-                  // },
+
                   font: "500 14px/18px Mulish, sans-serif ",
                 }}
               >
@@ -230,6 +198,8 @@ export function InitialLocationInput() {
                 type="number"
                 name="workA"
                 id="workA"
+                onChange={(e) => handleWorkChange(e)}
+                value={isForm.location.workingHours}
                 style={{
                   outline: "none",
                   border: "none",
@@ -248,21 +218,23 @@ export function InitialLocationInput() {
                   flexDirection: "column",
                 }}
               />
-              <div
+              <label
+                htmlFor="time"
                 style={{
                   color: "var(--black-400, #5A5A5A)",
                   marginTop: "16px",
                   whiteSpace: "nowrap",
-                  // "@media (max-width: 991px)": {
-                  //   whiteSpace: "initial",
-                  // },
+                  cursor: "pointer",
                   font: "500 14px/18px Mulish, sans-serif ",
                 }}
               >
                 Час прибуття
-              </div>
+              </label>
               <input
                 type="time"
+                id="time"
+                onChange={(e) => handleTimeChange(e)}
+                value={isForm.time}
                 style={{
                   outline: "none",
                   border: "none",
@@ -271,7 +243,6 @@ export function InitialLocationInput() {
                   font: "500 16px/20px Mulish, sans-serif ",
                 }}
               />
-              {/* 12:00 */}
 
               <div
                 style={{
@@ -286,6 +257,6 @@ export function InitialLocationInput() {
           </div>
         </div>
       </div>
-    </div>
+    </form>
   );
 }

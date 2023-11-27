@@ -1,7 +1,7 @@
 "use client";
 import { imageSrc } from "@/data/src";
-import { Coords } from "@/types";
-import React, { useRef, useState } from "react";
+import { Coords, OrderLocation } from "@/types";
+import React, { Dispatch, SetStateAction, useRef, useState } from "react";
 
 import PlacesAutocomplete, {
   geocodeByAddress,
@@ -33,8 +33,9 @@ export function AutocompleteInput({ id }: { id: string }) {
       {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
         <div>
           <label
-            htmlFor={id}
+            htmlFor={`location${id}`}
             style={{
+              cursor: "pointer",
               color: "var(--black-400, #5A5A5A)",
               marginTop: "15px",
               font: "500 14px/18px Mulish, sans-serif ",
@@ -61,7 +62,7 @@ export function AutocompleteInput({ id }: { id: string }) {
                 <input
                   {...getInputProps({
                     placeholder: "Введіть адресу ...",
-                    id: id,
+                    id: `location${id}`,
                   })}
                   style={{
                     outline: "none",
