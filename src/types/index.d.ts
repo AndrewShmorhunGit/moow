@@ -1,4 +1,4 @@
-export type Coords = { lat: null | number; lng: null | number };
+export type Coords = google.maps.LatLng | google.maps.LatLngLiteral;
 
 export type Order = {
   initialCoords: Coords;

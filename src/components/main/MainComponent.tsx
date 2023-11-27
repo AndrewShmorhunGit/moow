@@ -35,31 +35,21 @@ export function MainComponent() {
     const newLocation: OrderLocation = {
       id: locationsIdList[newLocationIndex],
       address: "",
-      locationCoords: { lat: null, lng: null },
+      locationCoords: { lat: 0, lng: 0 },
       workingHours: 0,
       distance: 0,
     };
     const newOrderLocations = [...orderLocations, newLocation];
 
-    dispatch(
-      setOrder({
-        ...initialState,
-        orderLocations: newOrderLocations,
-      })
-    );
+    dispatch(setOrder({ ...initialState, orderLocations: newOrderLocations }));
   };
 
   const handleRemoveLocation = () => {
     const length = orderLocations.length < 2 ? 2 : orderLocations.length - 1;
 
-    const newOrderLocations = trimArray(locationsIdList, length);
+    const newOrderLocations = trimArray(orderLocations, length);
 
-    dispatch(
-      setOrder({
-        ...initialState,
-        orderLocations: newOrderLocations,
-      })
-    );
+    dispatch(setOrder({ ...initialState, orderLocations: newOrderLocations }));
   };
 
   if (isClient)

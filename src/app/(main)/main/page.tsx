@@ -12,7 +12,7 @@ export default function Main() {
         defer
       />
       <div style={{ fontFamily: "Mulish", margin: "0 auto" }}>
-        <MainComponent />;
+        <MainComponent />
       </div>
     </>
   );

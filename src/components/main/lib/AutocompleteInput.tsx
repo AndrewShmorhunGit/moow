@@ -1,7 +1,16 @@
 "use client";
+import { setOrder } from "@/app/redux/features/order/order.slice";
 import { imageSrc } from "@/data/src";
+import { useAppDispatch, useAppSelector } from "@/hooks/useAppDispatch";
 import { Coords, OrderLocation } from "@/types";
-import React, { Dispatch, SetStateAction, useRef, useState } from "react";
+import { getLatitudeValue, getLongitude } from "@/utils/google";
+import React, {
+  Dispatch,
+  SetStateAction,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 
 import PlacesAutocomplete, {
   geocodeByAddress,
@@ -9,11 +18,30 @@ import PlacesAutocomplete, {
   getLatLng,
 } from "react-places-autocomplete";
 
-export function AutocompleteInput({ id }: { id: string }) {
-  const inputRef = useRef<HTMLInputElement>(null);
-  const [isAddress, setAddress] = useState("");
+export function AutocompleteInput({ id: locationId }: { id: string }) {
+  const dispatch = useAppDispatch();
+  const initialState = useAppSelector((state) => state.order);
+  const { orderLocations } = initialState;
+  const currentLocation = orderLocations.find(
+    (location) => location.id === locationId
+  );
 
-  const [isCoords, setCoords] = useState<Coords>({ lat: null, lng: null });
+  const [isAddress, setAddress] = useState(currentLocation?.address || "");
+  const [isCoords, setCoords] = useState<Coords>({ lat: 0, lng: 0 });
+
+  useEffect(() => {
+    const latitude = getLatitudeValue(isCoords.lat);
+    const longitude = getLatitudeValue(isCoords.lng);
+
+    if (latitude && longitude !== 0 && isAddress) {
+      const newOrderLocations = orderLocations.map((location) => {
+        return location.id === locationId
+          ? { ...location, address: isAddress, locationCoords: isCoords }
+          : location;
+      });
+      dispatch(setOrder({ orderLocations: newOrderLocations }));
+    }
+  }, [isAddress, isCoords]);
 
   const handleSelect = async (value: string) => {
     const results = await geocodeByAddress(value);
@@ -21,7 +49,6 @@ export function AutocompleteInput({ id }: { id: string }) {
 
     setAddress(value);
     setCoords({ lat: coords.lat, lng: coords.lng });
-    console.log(isCoords, isAddress);
   };
 
   return (
@@ -33,7 +60,7 @@ export function AutocompleteInput({ id }: { id: string }) {
       {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
         <div>
           <label
-            htmlFor={`location${id}`}
+            htmlFor={`location${locationId}`}
             style={{
               cursor: "pointer",
               color: "var(--black-400, #5A5A5A)",
@@ -62,7 +89,7 @@ export function AutocompleteInput({ id }: { id: string }) {
                 <input
                   {...getInputProps({
                     placeholder: "Введіть адресу ...",
-                    id: `location${id}`,
+                    id: `location${locationId}`,
                   })}
                   style={{
                     outline: "none",
@@ -98,7 +125,7 @@ export function AutocompleteInput({ id }: { id: string }) {
           </label>
           <div className="autocomplete-dropdown-container">
             {loading && <div>Loading...</div>}
-            {suggestions.map((suggestion) => {
+            {suggestions.map((suggestion, index) => {
               const className = suggestion.active
                 ? "suggestion-item--active"
                 : "suggestion-item";
@@ -107,13 +134,15 @@ export function AutocompleteInput({ id }: { id: string }) {
                 ? { backgroundColor: "#fafafa", cursor: "pointer" }
                 : { backgroundColor: "#ffffff", cursor: "pointer" };
               return (
-                <div
-                  {...getSuggestionItemProps(suggestion, {
-                    className,
-                    style,
-                  })}
-                >
-                  <span>{suggestion.description}</span>
+                <div key={index}>
+                  <div
+                    {...getSuggestionItemProps(suggestion, {
+                      className,
+                      style,
+                    })}
+                  >
+                    <span>{suggestion.description}</span>
+                  </div>
                 </div>
               );
             })}

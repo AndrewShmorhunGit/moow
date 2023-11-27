@@ -16,9 +16,7 @@ export function LocationForm({ index: formIndex }: { index: number }) {
   const locationName = locationsIdList[formIndex];
   const dispatch = useAppDispatch();
 
-  const initialState = useAppSelector((state) => state.order);
-
-  const { orderLocations } = initialState;
+  const { orderLocations } = useAppSelector((state) => state.order);
 
   const [isForm, setForm] = useState({
     location: orderLocations[formIndex],
@@ -44,7 +42,6 @@ export function LocationForm({ index: formIndex }: { index: number }) {
 
     dispatch(
       setOrder({
-        ...initialState,
         orderLocations: newOrderLocations,
       })
     );
@@ -80,7 +77,7 @@ export function LocationForm({ index: formIndex }: { index: number }) {
           }}
         >
           <div style={{ width: "71%" }}>
-            <AutocompleteInput id={`address${locationsIdList[formIndex]}`} />
+            <AutocompleteInput id={locationsIdList[formIndex]} />
           </div>
           <div style={{ width: "29%", marginLeft: "40px" }}>
             <div
