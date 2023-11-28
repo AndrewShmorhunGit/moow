@@ -10,7 +10,7 @@ export type Order = {
   clientInfo: ClientInfo | null;
   services: null;
   distanceToStorage: number;
-  totalRouteDistance: number;
+  totalDistance: number;
   routeDistance: number;
 };
 

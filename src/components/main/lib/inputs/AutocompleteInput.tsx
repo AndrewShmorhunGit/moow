@@ -80,7 +80,15 @@ export function AutocompleteInput({ id: locationId }: { id: string }) {
             </div>
           </label>
           <div className="autocomplete-dropdown-container">
-            {loading && <Spinner />}
+            {loading && (
+              <div
+                style={{
+                  transform: "translate(13rem,-12px) scale(0.5)",
+                }}
+              >
+                <Spinner />
+              </div>
+            )}
             {suggestions.map((suggestion, index) => {
               const className = suggestion.active
                 ? "suggestion-item--active"

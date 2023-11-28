@@ -14,7 +14,7 @@ export const HeroSection = ({ userId }: { userId: string | null }) => {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Follow along on Linked In
+          Repository code
         </Link>
         <h1 className="hero-title">
           Map-Integrated Website with Custom Design.

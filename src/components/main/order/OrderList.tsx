@@ -1,5 +1,6 @@
+"use client";
 import { useAppSelector } from "@/hooks/useAppDispatch";
-import React from "react";
+import React, { useState } from "react";
 import "./OrderList.scss";
 import OrderItem from "./item/OrderItem";
 import { showPrice } from "@/utils/functions";
@@ -8,11 +9,17 @@ import { OrderLocation } from "@/types";
 export function OrderList() {
   const initialState = useAppSelector((state) => state.order);
 
-  const { expedition, routeDistance, distanceToStorage, orderLocations } =
+  const { expedition, totalDistance, distanceToStorage, orderLocations } =
     initialState;
 
+  // const [isPrices, setPrices] = useState({
+  //   totalStoragePrice: distanceToStorage * 10,
+  //   routePrice: (totalRouteDistance - distanceToStorage) * 20,
+  //   expeditionPrice: expedition ? 2000 : 0,
+  // });
+
   const toStoragePrice = distanceToStorage * 10;
-  const routePrice = routeDistance * 20;
+  const routePrice = (totalDistance - distanceToStorage) * 20;
   const expeditionPrice = expedition ? 2000 : 0;
 
   function calculateTotalWorkingHours(locations: OrderLocation[]): number {
@@ -28,7 +35,10 @@ export function OrderList() {
 
   return (
     <div style={{ marginTop: "5px", display: "flex", flexDirection: "column" }}>
-      <OrderItem title="Подача транспотру" price={showPrice(toStoragePrice)} />
+      <OrderItem
+        title="Подача транспотру"
+        price={showPrice(distanceToStorage * 10)}
+      />
       <OrderItem
         title="Маршрут загрузка - вигрузка"
         price={showPrice(routePrice)}

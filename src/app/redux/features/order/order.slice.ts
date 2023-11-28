@@ -3,7 +3,9 @@ import { Order } from "@/types";
 import { loadOrderLocalStorage, saveToLocalStorage } from "@/utils/functions";
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState: Order = loadOrderLocalStorage() || {
+const loadedState = loadOrderLocalStorage();
+
+const initialState: Order = loadedState || {
   initialCoords: { lat: null, lng: null },
   orderDate: "",
   orderTime: "",
@@ -20,8 +22,8 @@ const initialState: Order = loadOrderLocalStorage() || {
   clientInfo: null,
   services: null,
   distanceToStorage: 0,
-  totalRouteDistance: 0,
-  routeDistance: 0,
+  totalDistance: 0,
+  // routeDistance: 0,
 };
 
 export const orderSlice = createSlice({

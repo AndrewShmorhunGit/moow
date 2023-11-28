@@ -5,6 +5,7 @@ import React, {
   useRef,
   useMemo,
   useCallback,
+  useLayoutEffect,
 } from "react";
 import { GoogleMap, Marker, DirectionsRenderer } from "@react-google-maps/api";
 import { useAppDispatch, useAppSelector } from "@/hooks/useAppDispatch";
@@ -20,18 +21,11 @@ export const Map: React.FC = () => {
   const dispatch = useAppDispatch();
   const initialState = useAppSelector((state) => state.order);
 
-  const {
-    orderLocations,
-    distanceToStorage,
-    totalRouteDistance,
-    routeDistance,
-  } = initialState;
+  const { orderLocations, distanceToStorage, totalDistance, routeDistance } =
+    initialState;
 
-  const [isRoutes, setRoutes] = useState({
-    distanceToStorage,
-    totalRouteDistance,
-    routeDistance,
-  });
+  const [isTotalDistance, setTotalDistance] = useState(totalDistance);
+  const [isStorageDistance, setStorageDistance] = useState(distanceToStorage);
 
   const markersMap: Map<
     string,
@@ -45,6 +39,10 @@ export const Map: React.FC = () => {
 
   const [currentLocation, setCurrentLocation] = useState({ lat: 0, lng: 0 });
 
+  useLayoutEffect(() => {
+    calculateRoute();
+  }, [currentLocation, orderLocations]);
+
   useEffect(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
@@ -55,18 +53,6 @@ export const Map: React.FC = () => {
       });
     }
   }, []);
-
-  useEffect(() => {
-    const { distanceToStorage, totalRouteDistance, routeDistance } = isRoutes;
-    dispatch(
-      setOrder({
-        ...initialState,
-        distanceToStorage,
-        totalRouteDistance,
-        routeDistance,
-      })
-    );
-  }, [isRoutes]);
 
   if (process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY === undefined) {
     throw new Error("Google maps API key is undefined!");
@@ -88,7 +74,7 @@ export const Map: React.FC = () => {
   const calculateRoute = useCallback(() => {
     if (validMarkers.length < 2) return;
 
-    const waypoints = validMarkers.map((marker: unknown) => ({
+    const waypoints = validMarkers.map((marker: React.JSX.Element) => ({
       location: marker.props.position,
       stopover: true,
     }));
@@ -110,13 +96,18 @@ export const Map: React.FC = () => {
         if (status === google.maps.DirectionsStatus.OK && result) {
           let storeDistance = 0;
           result.routes[0].legs.forEach((leg) => {
-            storeDistance += leg.distance.value;
+            if (leg.distance) {
+              storeDistance += leg.distance.value;
+            } else {
+              console.log("leg:", leg);
+            }
           });
           storeDistance = storeDistance / 1000;
 
-          setRoutes({ ...isRoutes, distanceToStorage: storeDistance });
-
-          console.log("Distance to first marker: ", storeDistance, "km");
+          if (storeDistance && storeDistance !== undefined) {
+            setStorageDistance(storeDistance);
+            console.log("Distance to first marker: ", storeDistance, "km");
+          }
         } else {
           console.error(`Error fetching distance to first marker`);
         }
@@ -131,23 +122,22 @@ export const Map: React.FC = () => {
         travelMode: google.maps.TravelMode.DRIVING,
       },
       (result, status) => {
-        if (status === google.maps.DirectionsStatus.OK) {
+        if (status === google.maps.DirectionsStatus.OK && result) {
           setDirectionsResponse(result);
 
           // Calculate the total distance
           let totalDistance = 0;
           result.routes[0].legs.forEach((leg) => {
-            totalDistance += leg.distance.value;
+            if (leg.distance) {
+              totalDistance += leg.distance.value;
+            }
           });
           totalDistance = totalDistance / 1000;
-          const routeDistance = totalDistance - initialState.distanceToStorage;
-          setRoutes({
-            ...isRoutes,
-            routeDistance,
-            totalRouteDistance: totalDistance,
-          });
 
-          console.log("Total distance: ", totalDistance, "km");
+          if (totalDistance && totalDistance !== undefined) {
+            setTotalDistance(totalDistance);
+            console.log("Total distance: ", totalDistance, "km");
+          }
         } else {
           console.error(
             `error fetching directions ${result}, Status: ${status}`
@@ -158,8 +148,15 @@ export const Map: React.FC = () => {
   }, [currentLocation, validMarkers]);
 
   useEffect(() => {
-    calculateRoute();
-  }, [currentLocation, orderLocations]);
+    dispatch(
+      setOrder({
+        ...initialState,
+        distanceToStorage: isStorageDistance,
+        totalDistance: isTotalDistance,
+        // routeDistance: isTotalDistance - ,
+      })
+    );
+  }, [isTotalDistance, isStorageDistance]);
 
   return (
     <GoogleMap

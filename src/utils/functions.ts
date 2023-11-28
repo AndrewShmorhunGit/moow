@@ -24,8 +24,13 @@ export const saveToLocalStorage = (state: any): void => {
 };
 
 export const loadOrderLocalStorage = (): any => {
+  if (typeof window === "undefined") {
+    // Return undefined or a default state if on server
+    return undefined;
+  }
+
   try {
-    const serializedState = global.localStorage.getItem("orderState");
+    const serializedState = localStorage.getItem("orderState");
     if (serializedState !== null) return JSON.parse(serializedState);
   } catch (e) {
     console.error("Could not load state", e);
