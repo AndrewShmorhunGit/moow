@@ -1,4 +1,5 @@
-import React from "react";
+import { UserButton } from "@clerk/nextjs";
+import "./Header.scss";
 
 export function Header() {
   return (
@@ -9,23 +10,17 @@ export function Header() {
         display: "flex",
         width: "100%",
         flexDirection: "column",
-        // "@media (max-width: 991px)": {
-        //   maxWidth: "100%",
-        // },
-        padding: "15px 20px",
+        padding: "10px 20px",
       }}
     >
       <div
-        style={{
-          display: "flex",
-          gap: "20px",
-          // "@media (max-width: 991px)": {
-          //   maxWidth: "100%",
-          //   flexWrap: "wrap",
-          //   justifyContent: "center",
-          // },
-          margin: "0 10px",
-        }}
+        className="header-container"
+        // style={{
+        //   display: "flex",
+        //   gap: "20px",
+        //   justifyContent: "space-between",
+        //   margin: "0 10px",
+        // }}
       >
         <img
           loading="lazy"
@@ -41,44 +36,41 @@ export function Header() {
             margin: "auto 0",
           }}
         />
-        <button className="primary-button" style={{}}>
-          Категорії
-        </button>
-        <div
-          style={{
-            justifyContent: "flex-end",
-            alignItems: "end",
-            borderRadius: "6px",
-            border: "1.5px solid var(--black-200, #C4C4C4)",
-            alignSelf: "center",
-            display: "flex",
-            flexGrow: "1",
-            flexBasis: "0%",
-            flexDirection: "column",
-            // "@media (max-width: 991px)": {
-            //   maxWidth: "100%",
-            // },
-            margin: "auto 0",
-            padding: "4px 20px",
-          }}
-        >
-          <img
-            loading="lazy"
-            src="https://cdn.builder.io/api/v1/image/assets/TEMP/9fa2bd45-ec42-432c-9c12-30c569f43e0f?apiKey=ee58232a01b242d2a13bbbde4b7b89e4&"
+        <div className="header-center">
+          <button className="primary-button">Категорії</button>
+          <div
             style={{
-              aspectRatio: "1",
-              objectFit: "contain",
-              objectPosition: "center",
-              width: "25px",
-              justifyContent: "center",
-              alignItems: "center",
-              overflow: "hidden",
-              marginRight: "-10px",
-              maxWidth: "100%",
+              justifyContent: "flex-end",
+              alignItems: "end",
+              borderRadius: "6px",
+              border: "1.5px solid var(--black-200, #C4C4C4)",
+              alignSelf: "center",
+              display: "flex",
+              flexGrow: "1",
+              flexBasis: "0%",
+              flexDirection: "column",
+              margin: "auto 0",
+              padding: "4px 20px",
             }}
-          />
+          >
+            <img
+              loading="lazy"
+              src="https://cdn.builder.io/api/v1/image/assets/TEMP/9fa2bd45-ec42-432c-9c12-30c569f43e0f?apiKey=ee58232a01b242d2a13bbbde4b7b89e4&"
+              style={{
+                aspectRatio: "1",
+                objectFit: "contain",
+                objectPosition: "center",
+                width: "25px",
+                justifyContent: "center",
+                alignItems: "center",
+                overflow: "hidden",
+                marginRight: "-10px",
+                maxWidth: "100%",
+              }}
+            />
+          </div>
+          <div className="secondary-button">Створити оголошення</div>
         </div>
-        <div className="secondary-button">Створити оголошення</div>
         <div
           style={{
             alignSelf: "center",
@@ -122,18 +114,8 @@ export function Header() {
                 maxWidth: "100%",
               }}
             />
-            <img
-              loading="lazy"
-              src="https://cdn.builder.io/api/v1/image/assets/TEMP/b7c165f0-49b1-4b77-9ef3-53a05bb5d343?apiKey=ee58232a01b242d2a13bbbde4b7b89e4&"
-              style={{
-                aspectRatio: "1",
-                objectFit: "contain",
-                objectPosition: "center",
-                width: "25px",
-                overflow: "hidden",
-                maxWidth: "100%",
-              }}
-            />
+            <UserButton afterSignOutUrl="/" />
+
             <img
               loading="lazy"
               src="https://cdn.builder.io/api/v1/image/assets/TEMP/438bad41-8d03-4bd8-8245-76efa0217b9f?apiKey=ee58232a01b242d2a13bbbde4b7b89e4&"

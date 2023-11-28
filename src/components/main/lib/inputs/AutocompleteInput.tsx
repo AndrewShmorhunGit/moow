@@ -1,16 +1,12 @@
 "use client";
+import "./AutocompleteInput.scss";
 import { setOrder } from "@/app/redux/features/order/order.slice";
+import { Spinner } from "@/components/lib/spinner/Spinner";
 import { imageSrc } from "@/data/src";
 import { useAppDispatch, useAppSelector } from "@/hooks/useAppDispatch";
-import { Coords, OrderLocation } from "@/types";
-import { getLatitudeValue, getLongitude } from "@/utils/google";
-import React, {
-  Dispatch,
-  SetStateAction,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { Coords } from "@/types";
+import { getLatitudeValue } from "@/utils/google";
+import React, { useEffect, useState } from "react";
 
 import PlacesAutocomplete, {
   geocodeByAddress,
@@ -39,7 +35,12 @@ export function AutocompleteInput({ id: locationId }: { id: string }) {
           ? { ...location, address: isAddress, locationCoords: isCoords }
           : location;
       });
-      dispatch(setOrder({ orderLocations: newOrderLocations }));
+      dispatch(
+        setOrder({
+          ...initialState,
+          orderLocations: newOrderLocations,
+        })
+      );
     }
   }, [isAddress, isCoords]);
 
@@ -61,70 +62,25 @@ export function AutocompleteInput({ id: locationId }: { id: string }) {
         <div>
           <label
             htmlFor={`location${locationId}`}
-            style={{
-              cursor: "pointer",
-              color: "var(--black-400, #5A5A5A)",
-              marginTop: "15px",
-              font: "500 14px/18px Mulish, sans-serif ",
-            }}
+            className="autocomplete-label"
           >
             Адреса
-            <div
-              style={{
-                display: "flex",
-                marginTop: "5px",
-                paddingRight: "10px",
-                justifyContent: "space-between",
-                gap: "3px",
-              }}
-            >
-              <div
-                style={{
-                  display: "flex",
-                  flexGrow: "1",
-                  flexBasis: "0%",
-                  flexDirection: "column",
-                }}
-              >
+            <div className="autocomplete-wrapper">
+              <div className="autocomplete-input-container">
                 <input
                   {...getInputProps({
                     placeholder: "Введіть адресу ...",
                     id: `location${locationId}`,
                   })}
-                  style={{
-                    outline: "none",
-                    border: "none",
-                    color: "var(--black-500, #262626)",
-                    font: "500 16px/20px Mulish, sans-serif ",
-                  }}
+                  className="autocomplete-input"
                 />
-                <div
-                  style={{
-                    background: "#665CD1",
-                    display: "flex",
-                    height: "1px",
-                    flexDirection: "column",
-                  }}
-                />
+                <div className="underline" />
               </div>
-              <img
-                loading="lazy"
-                srcSet={imageSrc}
-                style={{
-                  transform: "scale(0.9)",
-                  aspectRatio: "1",
-                  objectFit: "contain",
-                  objectPosition: "center",
-                  width: "25px",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  overflow: "hidden",
-                }}
-              />
+              <img loading="lazy" srcSet={imageSrc} className="icon" />
             </div>
           </label>
           <div className="autocomplete-dropdown-container">
-            {loading && <div>Loading...</div>}
+            {loading && <Spinner />}
             {suggestions.map((suggestion, index) => {
               const className = suggestion.active
                 ? "suggestion-item--active"

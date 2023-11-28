@@ -1,29 +1,20 @@
 "use client";
-import React from "react";
-import StarLogo from "../lib/Logo/StarLogo";
+import "./Footer.scss";
+import StarLogo from "../lib/logos/StarLogo";
 
 export function Footer() {
   return (
-    <div style={{ width: "100%" }}>
+    <div className="main">
       <div
         style={{
           justifyContent: "space-between",
           alignSelf: "stretch",
           marginTop: "10px",
-          // "@media (max-width: 991px)": {
-          //   maxWidth: "100%",
-          // },
         }}
       >
         <div
           style={{
-            // gap: "20px",
             display: "flex",
-            // "@media (max-width: 991px)": {
-            //   flexDirection: "column",
-            //   alignItems: "stretch",
-            //   gap: "0px",
-            // },
           }}
         >
           <div
@@ -33,30 +24,17 @@ export function Footer() {
               lineHeight: "normal",
               width: "70%",
               marginLeft: "0px",
-              // "@media (max-width: 991px)": {
-              //   width: "100%",
-              //   marginLeft: 0,
-              // },
             }}
           >
             <div
               style={{
                 flexGrow: "1",
-                // "@media (max-width: 991px)": {
-                //   maxWidth: "100%",
-                //   marginTop: "40px",
-                // },
               }}
             >
               <div
                 style={{
                   gap: "20px",
                   display: "flex",
-                  // "@media (max-width: 991px)": {
-                  //   flexDirection: "column",
-                  //   alignItems: "stretch",
-                  //   gap: "0px",
-                  // },
                 }}
               >
                 <div
@@ -66,10 +44,6 @@ export function Footer() {
                     lineHeight: "normal",
                     width: "18%",
                     marginLeft: "0px",
-                    // "@media (max-width: 991px)": {
-                    //   width: "100%",
-                    //   marginLeft: 0,
-                    // },
                   }}
                 >
                   <div
@@ -77,9 +51,6 @@ export function Footer() {
                       alignItems: "start",
                       display: "flex",
                       gap: "5px",
-                      // "@media (max-width: 991px)": {
-                      //   marginTop: "40px",
-                      // },
                     }}
                   >
                     {/* <StarLogo /> */}
@@ -96,9 +67,7 @@ export function Footer() {
                         style={{
                           color: "var(--black-500, #262626)",
                           whiteSpace: "nowrap",
-                          // "@media (max-width: 991px)": {
-                          //   whiteSpace: "initial",
-                          // },
+
                           font: "700 14px/18px Mulish, sans-serif ",
                         }}
                       >
@@ -109,9 +78,7 @@ export function Footer() {
                           color: "var(--black-400, #5A5A5A)",
                           marginTop: "10px",
                           whiteSpace: "nowrap",
-                          // "@media (max-width: 991px)": {
-                          //   whiteSpace: "initial",
-                          // },
+
                           font: "500 14px/18px Mulish, sans-serif ",
                         }}
                       >
@@ -122,9 +89,7 @@ export function Footer() {
                           color: "var(--black-400, #5A5A5A)",
                           marginTop: "10px",
                           whiteSpace: "nowrap",
-                          // "@media (max-width: 991px)": {
-                          //   whiteSpace: "initial",
-                          // },
+
                           font: "500 14px/18px Mulish, sans-serif ",
                         }}
                       >
@@ -135,9 +100,7 @@ export function Footer() {
                           color: "var(--black-400, #5A5A5A)",
                           marginTop: "10px",
                           whiteSpace: "nowrap",
-                          // "@media (max-width: 991px)": {
-                          //   whiteSpace: "initial",
-                          // },
+
                           font: "500 14px/18px Mulish, sans-serif ",
                         }}
                       >
@@ -148,9 +111,7 @@ export function Footer() {
                           color: "var(--black-400, #5A5A5A)",
                           marginTop: "10px",
                           whiteSpace: "nowrap",
-                          // "@media (max-width: 991px)": {
-                          //   whiteSpace: "initial",
-                          // },
+
                           font: "500 14px/18px Mulish, sans-serif ",
                         }}
                       >
@@ -166,10 +127,6 @@ export function Footer() {
                     lineHeight: "normal",
                     width: "36%",
                     marginLeft: "20px",
-                    // "@media (max-width: 991px)": {
-                    //   width: "100%",
-                    //   marginLeft: 0,
-                    // },
                   }}
                 >
                   <div
@@ -179,9 +136,6 @@ export function Footer() {
                       flexGrow: "1",
                       justifyContent: "space-between",
                       gap: "5px",
-                      // "@media (max-width: 991px)": {
-                      //   marginTop: "40px",
-                      // },
                     }}
                   >
                     {/* <StarLogo /> */}
@@ -422,23 +376,16 @@ export function Footer() {
                     lineHeight: "normal",
                     width: "19%",
                     marginLeft: "20px",
-                    // "@media (max-width: 991px)": {
-                    //   width: "100%",
-                    //   marginLeft: 0,
-                    // },
                   }}
                 >
                   <div
                     style={{
                       display: "flex",
                       gap: "5px",
-                      // "@media (max-width: 991px)": {
-                      //   marginTop: "40px",
-                      // },
                     }}
                   >
                     {/* <StarLogo /> */}
-                    {/* <div
+                    <div
                       style={{
                         display: "flex",
                         flexGrow: "1",
@@ -458,7 +405,7 @@ export function Footer() {
                       >
                         Документи
                       </div>
-                    </div> */}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -471,10 +418,6 @@ export function Footer() {
               lineHeight: "normal",
               width: "30%",
               marginLeft: "20px",
-              // "@media (max-width: 991px)": {
-              //   width: "100%",
-              //   marginLeft: 0,
-              // },
             }}
           >
             <div
@@ -483,23 +426,18 @@ export function Footer() {
                 display: "flex",
                 paddingBottom: "15px",
                 flexDirection: "column",
-                // "@media (max-width: 991px)": {
-                //   marginTop: "40px",
-                // },
               }}
             >
-              {/* <div
+              <div
                 style={{
                   color: "var(--black-500, #262626)",
                   whiteSpace: "nowrap",
-                  // "@media (max-width: 991px)": {
-                  //   whiteSpace: "initial",
-                  // },
+
                   font: "700 14px/18px Mulish, sans-serif ",
                 }}
               >
                 Встанови безкоштовний додаток на смартфон
-              </div> */}
+              </div>
               <div
                 style={{
                   alignSelf: "center",
@@ -599,10 +537,7 @@ export function Footer() {
           alignSelf: "stretch",
           color: "var(--black-300, #7E7E7E)",
           textAlign: "center",
-          marginTop: "20px",
-          // "@media (max-width: 991px)": {
-          //   maxWidth: "100%",
-          // },
+          margin: "20px 0",
           font: "700 11px/14px Mulish, sans-serif ",
         }}
       >

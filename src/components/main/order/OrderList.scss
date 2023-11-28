@@ -1,0 +1,19 @@
+.outer-div {
+  justify-content: space-between;
+  align-self: stretch;
+  display: flex;
+  margin-top: 15px;
+  gap: 20px;
+}
+
+.inner-div {
+  color: var(--black-500, #262626);
+  text-align: center;
+  font: 300 14px/18px Mulish, sans-serif;
+}
+
+.inner-div-nowrap {
+  @extend .inner-div;
+  white-space: nowrap;
+  font-weight: 500;
+}

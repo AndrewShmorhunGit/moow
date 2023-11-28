@@ -11,15 +11,17 @@ const initialState: Order = loadOrderLocalStorage() || {
     {
       id: "A",
       address: "",
-      locationCoords: { lat: 0, lng: 0 },
+      locationCoords: { lat: null, lng: null },
       workingHours: 0,
-      distance: 0,
     },
   ],
   cargoInfo: null,
   expedition: false,
   clientInfo: null,
   services: null,
+  distanceToStorage: 0,
+  totalRouteDistance: 0,
+  routeDistance: 0,
 };
 
 export const orderSlice = createSlice({
@@ -28,7 +30,7 @@ export const orderSlice = createSlice({
   reducers: {
     setOrder: (state, action) => {
       saveToLocalStorage(action.payload);
-      return { ...state, ...action.payload };
+      return action.payload;
     },
   },
 });

@@ -158,3 +158,9 @@ body.scroll-bar::-webkit-scrollbar-thumb {
   background-color: var(--black-600, #171717);
   box-shadow: 0px 0px 0px 0px rgba(77, 76, 76, 0.8);
 }
+
+.underline {
+  background: #665cd1;
+  display: flex;
+  height: 1px;
+}

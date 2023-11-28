@@ -5,10 +5,13 @@ export type Order = {
   orderDate: string;
   orderTime: string;
   orderLocations: OrderLocation[];
-  cargoInfo: Cargo | null;
+  cargoInfo: Cargo;
   expedition: boolean;
   clientInfo: ClientInfo | null;
   services: null;
+  distanceToStorage: number;
+  totalRouteDistance: number;
+  routeDistance: number;
 };
 
 export type ClientInfo = {
@@ -22,7 +25,6 @@ export type OrderLocation = {
   address: string;
   locationCoords: Coords;
   workingHours: number;
-  distance: number;
 };
 
 export type Cargo = {
@@ -30,4 +32,5 @@ export type Cargo = {
   height: number;
   width: number;
   length: number;
+  description: string;
 };

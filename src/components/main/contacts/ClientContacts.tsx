@@ -1,5 +1,5 @@
 "use client";
-import { Input } from "../lib/Input";
+import { Input } from "../lib/inputs/Input";
 
 export function ClientContacts() {
   return (
@@ -8,7 +8,7 @@ export function ClientContacts() {
         style={{
           color: "var(--purple-600, #665CD1)",
           alignSelf: "stretch",
-          margin: "20px -20px 0 0",
+          margin: "20px 0px 0 0",
           font: "700 19px/24px Mulish, sans-serif ",
         }}
       >

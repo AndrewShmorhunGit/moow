@@ -1,18 +1,49 @@
 "use client";
-import React from "react";
-import { Input } from "../lib/Input";
+import React, { TextareaHTMLAttributes, useState } from "react";
+import { Input } from "../lib/inputs/Input";
+import { useAppDispatch, useAppSelector } from "@/hooks/useAppDispatch";
+import { disconnect } from "process";
+import { setOrder } from "@/app/redux/features/order/order.slice";
 
 export default function AboutCargo() {
+  const dispatch = useAppDispatch();
+  const initialState = useAppSelector((state) => state.order);
+  const { expedition, cargoInfo } = initialState;
+
+  const [isCargo, setCargo] = useState({
+    weight: 0,
+    width: 0,
+    length: 0,
+    height: 0,
+    description: "",
+  });
+
+  const handleDescriptionChange = (
+    e: React.ChangeEvent<HTMLTextAreaElement>
+  ) => {
+    const target = e.target;
+    let description = target.value;
+    if (description.length > 1000) {
+      description = description.substring(0, 1000);
+    }
+    setCargo({ ...isCargo, description });
+  };
+
+  const onWeightChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const target = e.target;
+    const weight = +target.value;
+    if (weight > 0) {
+      setCargo({ ...isCargo, weight });
+    }
+  };
+
   return (
     <div style={{ display: "flex", flexDirection: "column", width: "100%" }}>
       <div
         style={{
           color: "var(--purple-600, #665CD1)",
           alignSelf: "stretch",
-          // "@media (max-width: 991px)": {
-          //   maxWidth: "100%",
-          // },
-          margin: "20px -20px 0 0",
+          margin: "20px 0px 0 0",
           font: "700 19px/24px Mulish, sans-serif ",
         }}
       >
@@ -24,10 +55,7 @@ export default function AboutCargo() {
           display: "flex",
           justifyContent: "space-between",
           gap: "20px",
-          // "@media (max-width: 991px)": {
-          //   maxWidth: "100%",
-          //   flexWrap: "wrap",
-          // },
+
           margin: "15px -20px 0 0",
         }}
       >
@@ -39,38 +67,15 @@ export default function AboutCargo() {
             flexDirection: "column",
           }}
         >
-          {/* <div
-            style={{
-              color: "var(--black-400, #5A5A5A)",
-              font: "500 14px/18px Mulish, sans-serif ",
-            }}
-          >
-            Вага вантажу (кг)
-          </div>
-          <div
-            style={{
-              color: "var(--black-500, #262626)",
-              marginTop: "5px",
-              font: "500 16px/20px Mulish, sans-serif ",
-            }}
-          >
-            500
-          </div> */}
           <Input
             type={"number"}
             id={"weight"}
+            value={isCargo.weight}
+            onInputChange={onWeightChange}
             label={"Вага вантажу (кг)"}
             placeholder="500"
           />
-          <div
-            style={{
-              borderRadius: "10px",
-              background: "#665CD1",
-              display: "flex",
-              height: "1px",
-              flexDirection: "column",
-            }}
-          />
+          <div className="underline" />
         </div>
         <div
           style={{
@@ -94,11 +99,9 @@ export default function AboutCargo() {
               display: "flex",
               marginTop: "5px",
               gap: "5px",
-              // "@media (max-width: 991px)": {
-              //   justifyContent: "center",
-              // },
             }}
           >
+            <div className="underline" />
             <div
               style={{
                 alignSelf: "stretch",
@@ -114,17 +117,9 @@ export default function AboutCargo() {
                   font: "500 16px/20px Mulish, sans-serif ",
                 }}
               >
-                500{" "}
+                500
               </div>
-              <div
-                style={{
-                  borderRadius: "10px",
-                  background: "#665CD1",
-                  display: "flex",
-                  height: "1px",
-                  flexDirection: "column",
-                }}
-              />
+              <div className="underline" />
             </div>
             <div
               style={{
@@ -152,15 +147,7 @@ export default function AboutCargo() {
               >
                 500
               </div>
-              <div
-                style={{
-                  borderRadius: "10px",
-                  background: "#665CD1",
-                  display: "flex",
-                  height: "1px",
-                  flexDirection: "column",
-                }}
-              />
+              <div className="underline" />
             </div>
             <div
               style={{
@@ -188,15 +175,7 @@ export default function AboutCargo() {
               >
                 500{" "}
               </div>
-              <div
-                style={{
-                  borderRadius: "10px",
-                  background: "#665CD1",
-                  display: "flex",
-                  height: "1px",
-                  flexDirection: "column",
-                }}
-              />
+              <div className="underline" />
             </div>
           </div>
         </div>
@@ -206,9 +185,7 @@ export default function AboutCargo() {
         style={{
           color: "var(--black-400, #5A5A5A)",
           alignSelf: "stretch",
-          // "@media (max-width: 991px)": {
-          //   maxWidth: "100%",
-          // },
+
           margin: "20px -20px 0 0",
           font: "500 14px/18px Mulish, sans-serif ",
         }}
@@ -219,6 +196,9 @@ export default function AboutCargo() {
         <textarea
           placeholder="Укажіть інформацію про груз, що перевозите..."
           id="comment"
+          value={isCargo.description}
+          onChange={handleDescriptionChange}
+          maxLength={1000}
           style={{
             color: "var(--black-300, #7E7E7E)",
             position: "relative",
@@ -243,12 +223,9 @@ export default function AboutCargo() {
             marginTop: "10px",
             zIndex: "100",
             font: "500 12px/15px Mulish, sans-serif ",
-            // "@media (max-width: 991px)": {
-            //   maxWidth: "100%",
-            // },
           }}
         >
-          0 / 1 000
+          {`${isCargo.description.length} / 1 000`}
         </div>
       </div>
       <div
@@ -258,9 +235,7 @@ export default function AboutCargo() {
           display: "flex",
           height: "1px",
           flexDirection: "column",
-          // "@media (max-width: 991px)": {
-          //   maxWidth: "100%",
-          // },
+
           margin: "20px -20px 0 0",
         }}
       />
@@ -270,7 +245,6 @@ export default function AboutCargo() {
           alignSelf: "start",
           display: "flex",
           marginTop: "20px",
-          // width: "209px",
           maxWidth: "100%",
           gap: "10px",
         }}
@@ -285,6 +259,15 @@ export default function AboutCargo() {
           <input
             type="checkbox"
             id="expedition"
+            checked={expedition}
+            onChange={(e) =>
+              dispatch(
+                setOrder({
+                  ...initialState,
+                  expedition: !initialState.expedition,
+                })
+              )
+            }
             style={{
               color: "#665CD1",
               borderRadius: "1.6px",
@@ -297,6 +280,7 @@ export default function AboutCargo() {
         <label
           htmlFor="expedition"
           style={{
+            cursor: "pointer",
             color: "var(--purple-600, #665CD1)",
             alignSelf: "start",
             flexGrow: "1",
@@ -314,9 +298,7 @@ export default function AboutCargo() {
           display: "flex",
           height: "1px",
           flexDirection: "column",
-          // "@media (max-width: 991px)": {
-          //   maxWidth: "100%",
-          // },
+
           margin: "20px -20px 0 0",
         }}
       />

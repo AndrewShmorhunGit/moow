@@ -1,0 +1,39 @@
+// InitialLocationForm.scss
+.initial-location-form {
+  justify-content: space-between;
+  border-radius: 10px;
+  border: 1px solid var(--black-200, #c4c4c4);
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  margin: 10px 0px 0 0;
+  padding: 15px;
+}
+
+.location-title {
+  color: var(--black-500, #262626);
+  white-space: nowrap;
+  font: 700 16px/20px Mulish, sans-serif;
+  margin-bottom: 0px;
+}
+
+.location-details {
+  flex-direction: row;
+  display: flex;
+  gap: 20px;
+}
+
+.input-section {
+  display: flex;
+  flex-direction: column;
+  line-height: normal;
+}
+
+.input-section--wide {
+  width: 100%;
+}
+
+.input-section--narrow {
+  width: 29%;
+  margin-left: 20px;
+}

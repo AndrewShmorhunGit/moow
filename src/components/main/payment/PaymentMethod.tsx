@@ -5,10 +5,7 @@ export function PaymentMethod() {
         style={{
           alignSelf: "stretch",
           color: "var(--purple-600, #665CD1)",
-          // "@media (max-width: 991px)": {
-          //   maxWidth: "100%",
-          // },
-          margin: "20px -20px 0 0",
+          margin: "20px 0px 0 0",
           font: "700 19px/24px Mulish, sans-serif ",
         }}
       >
@@ -22,13 +19,8 @@ export function PaymentMethod() {
           display: "flex",
           justifyContent: "space-between",
           gap: "11px",
-          // "@media (max-width: 991px)": {
-          //   maxWidth: "100%",
-          //   flexWrap: "wrap",
-          //   paddingRight: "20px",
-          // },
-          margin: "15px -20px 0 0",
-          padding: "11px 80px 11px 11px",
+          margin: "15px 0px 0 0",
+          padding: "11px 10px 11px 11px",
         }}
       >
         <div
@@ -66,9 +58,7 @@ export function PaymentMethod() {
             alignSelf: "start",
             flexGrow: "1",
             whiteSpace: "nowrap",
-            // "@media (max-width: 991px)": {
-            //   whiteSpace: "initial",
-            // },
+
             font: "700 16px/20px Mulish, sans-serif ",
           }}
         >
@@ -83,12 +73,8 @@ export function PaymentMethod() {
           display: "flex",
           justifyContent: "space-between",
           gap: "11px",
-          // "@media (max-width: 991px)": {
-          //   maxWidth: "100%",
-          //   flexWrap: "wrap",
-          //   paddingRight: "20px",
-          // },
-          margin: "15px -20px 0 0",
+
+          margin: "15px 0px 0 0",
           padding: "11px 80px 11px 11px",
         }}
       >
@@ -129,7 +115,7 @@ export function PaymentMethod() {
           //   flexWrap: "wrap",
           //   justifyContent: "center",
           // },
-          margin: "15px -20px 0 0",
+          margin: "15px 0px 0 0",
           padding: "11px 10px 11px 11px",
         }}
       >

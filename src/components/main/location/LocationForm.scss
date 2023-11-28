@@ -1,0 +1,36 @@
+.location-form-container {
+  justify-content: space-between;
+  border-radius: 10px;
+  border: 1px solid var(--black-200, #c4c4c4);
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  margin: 10px 0 0 0;
+  padding: 15px;
+}
+
+.location-title {
+  color: var(--black-500, #262626);
+  white-space: nowrap;
+  padding-bottom: 15px;
+  font: 700 16px/20px Mulish, sans-serif;
+}
+
+.location-fields {
+  display: flex;
+}
+
+.input-group {
+  width: 71%;
+}
+
+.additional-fields {
+  width: 29%;
+  margin-left: 40px;
+}
+
+.input-field {
+  display: flex;
+  flex-basis: 0%;
+  flex-direction: column;
+}

@@ -3,8 +3,7 @@ import Link from "next/link";
 import "./HeroSection.scss";
 import { auth } from "@clerk/nextjs";
 
-export const HeroSection = async () => {
-  const { userId } = await auth();
+export const HeroSection = ({ userId }: { userId: string | null }) => {
   const href = userId ? "/main" : "/auth";
   return (
     <section className="hero-section">
@@ -21,8 +20,9 @@ export const HeroSection = async () => {
           Map-Integrated Website with Custom Design.
         </h1>
         <p className="hero-description">
-          Development of a Responsive, Map-Integrated Website with Custom Design
-          Compliance and Dynamic Price Calculation Functionality.
+          Developing a responsive website with an integrated map with custom
+          design and dynamic pricing functionality depends on dynamically
+          generated routes.
         </p>
         <div className="hero-buttons">
           <Link href={href} className="hero-button">

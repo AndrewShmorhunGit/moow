@@ -1,0 +1,14 @@
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 540px;
+  column-gap: 16px;
+  @media (max-width: 901px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.footer-logo {
+  @media (max-width: 901px) {
+    display: none;
+  }
+}

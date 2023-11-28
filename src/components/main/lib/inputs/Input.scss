@@ -1,0 +1,21 @@
+.input-container {
+  display: flex;
+  flex-direction: column;
+  line-height: normal;
+  margin-left: 0px;
+}
+
+.input-label {
+  cursor: pointer;
+  width: 8rem;
+  color: var(--black-400, #5a5a5a);
+  font: 500 14px/18px Mulish, sans-serif;
+}
+
+.input-field {
+  outline: none;
+  border: none;
+  color: var(--black-500, #262626);
+  margin-top: 5px;
+  font: 500 16px/20px Mulish, sans-serif;
+}

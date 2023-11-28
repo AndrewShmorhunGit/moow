@@ -1,7 +1,7 @@
 "use client";
 import dynamic from "next/dynamic";
-import React from "react";
-import { ConfirmOrderList } from "../order/ConfirmOrderList";
+import "./InfoBlock.scss";
+import { OrderList } from "../order/OrderList";
 const MapWithNoSSR = dynamic(() => import("@/components/map/Map"), {
   ssr: false,
 });
@@ -12,14 +12,7 @@ export default function InfoBlock() {
         display: "flex",
         flexDirection: "column",
         lineHeight: "normal",
-        marginRight: "20px",
-
-        // width: "80%",
-        // marginLeft: "20px",
-        // "@media (max-width: 991px)": {
-        //   width: "100%",
-        //   marginLeft: 0,
-        // },
+        margin: "10px 10px",
       }}
     >
       <div
@@ -28,12 +21,8 @@ export default function InfoBlock() {
           backgroundColor: "var(--purple-100, #F1F0FF)",
           display: "flex",
           flexDirection: "column",
-          // "@media (max-width: 991px)": {
-          //   maxWidth: "100%",
-          //   marginTop: "40px",
-          // },
-          // margin: "0 auto",
           padding: "10px",
+          justifyContent: "center",
         }}
       >
         <div
@@ -44,35 +33,10 @@ export default function InfoBlock() {
             backgroundColor: "var(--bg, #FEFEFE)",
             paddingRight: "5px",
             marginBottom: "10px",
-            // "@media (max-width: 991px)": {
-            //   maxWidth: "100%",
-            // },
           }}
         >
-          <div
-            style={{
-              gap: "20px",
-              display: "flex",
-              height: "6.4rem",
-              // "@media (max-width: 991px)": {
-              //   flexDirection: "column",
-              //   alignItems: "stretch",
-              //   gap: "0px",
-              // },
-            }}
-          >
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                lineHeight: "normal",
-                marginLeft: "0px",
-                // "@media (max-width: 991px)": {
-                //   width: "100%",
-                //   marginLeft: 0,
-                // },
-              }}
-            >
+          <div className="advertisement-container">
+            <div className="advertisement">
               <img
                 loading="lazy"
                 srcSet="https://cdn.builder.io/api/v1/image/assets/TEMP/7a9eb049-d24b-4ddf-81ed-d029f375fc94?apiKey=ee58232a01b242d2a13bbbde4b7b89e4&width=100 100w, https://cdn.builder.io/api/v1/image/assets/TEMP/7a9eb049-d24b-4ddf-81ed-d029f375fc94?apiKey=ee58232a01b242d2a13bbbde4b7b89e4&width=200 200w, https://cdn.builder.io/api/v1/image/assets/TEMP/7a9eb049-d24b-4ddf-81ed-d029f375fc94?apiKey=ee58232a01b242d2a13bbbde4b7b89e4&width=400 400w, https://cdn.builder.io/api/v1/image/assets/TEMP/7a9eb049-d24b-4ddf-81ed-d029f375fc94?apiKey=ee58232a01b242d2a13bbbde4b7b89e4&width=800 800w, https://cdn.builder.io/api/v1/image/assets/TEMP/7a9eb049-d24b-4ddf-81ed-d029f375fc94?apiKey=ee58232a01b242d2a13bbbde4b7b89e4&width=1200 1200w, https://cdn.builder.io/api/v1/image/assets/TEMP/7a9eb049-d24b-4ddf-81ed-d029f375fc94?apiKey=ee58232a01b242d2a13bbbde4b7b89e4&width=1600 1600w, https://cdn.builder.io/api/v1/image/assets/TEMP/7a9eb049-d24b-4ddf-81ed-d029f375fc94?apiKey=ee58232a01b242d2a13bbbde4b7b89e4&width=2000 2000w, https://cdn.builder.io/api/v1/image/assets/TEMP/7a9eb049-d24b-4ddf-81ed-d029f375fc94?apiKey=ee58232a01b242d2a13bbbde4b7b89e4&"
@@ -84,34 +48,17 @@ export default function InfoBlock() {
                   overflow: "hidden",
                   maxWidth: "100%",
                   flexGrow: "1",
-                  // "@media (max-width: 991px)": {
-                  //   marginTop: "10px",
-                  // },
+                  borderRadius: "8px",
                 }}
               />
             </div>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                lineHeight: "normal",
-                width: "57%",
-                marginLeft: "20px",
-                // "@media (max-width: 991px)": {
-                //   width: "100%",
-                //   marginLeft: 0,
-                // },
-              }}
-            >
+            <div className="text-block">
               <div
                 style={{
                   alignSelf: "stretch",
                   display: "flex",
                   paddingBottom: "13px",
                   gap: "15px",
-                  // "@media (max-width: 991px)": {
-                  //   marginTop: "15px",
-                  // },
                   margin: "auto 0",
                 }}
               >
@@ -138,9 +85,7 @@ export default function InfoBlock() {
                       color: "#665CD1",
                       marginTop: "5px",
                       whiteSpace: "nowrap",
-                      // "@media (max-width: 991px)": {
-                      //   whiteSpace: "initial",
-                      // },
+
                       font: "700 19px/24px Mulish, sans-serif ",
                     }}
                   >
@@ -150,9 +95,7 @@ export default function InfoBlock() {
                     style={{
                       color: "var(--50-shades-of-moow-400, #5A5A5A)",
                       whiteSpace: "nowrap",
-                      // "@media (max-width: 991px)": {
-                      //   whiteSpace: "initial",
-                      // },
+
                       font: "300 14px/18px Mulish, sans-serif ",
                     }}
                   >
@@ -172,9 +115,7 @@ export default function InfoBlock() {
                       color: "var(--black-400, #5A5A5A)",
                       textAlign: "right",
                       whiteSpace: "nowrap",
-                      // "@media (max-width: 991px)": {
-                      //   whiteSpace: "initial",
-                      // },
+
                       font: "300 14px/18px Mulish, sans-serif ",
                     }}
                   >
@@ -207,9 +148,7 @@ export default function InfoBlock() {
                         alignSelf: "center",
                         flexGrow: "1",
                         whiteSpace: "nowrap",
-                        // "@media (max-width: 991px)": {
-                        //   whiteSpace: "initial",
-                        // },
+
                         margin: "auto 0",
                         font: "500 14px/18px Mulish, sans-serif ",
                       }}
@@ -242,9 +181,7 @@ export default function InfoBlock() {
                         color: "var(--50-shades-of-moow-400, #5A5A5A)",
                         flexGrow: "1",
                         whiteSpace: "nowrap",
-                        // "@media (max-width: 991px)": {
-                        //   whiteSpace: "initial",
-                        // },
+
                         font: "300 14px/18px Mulish, sans-serif ",
                       }}
                     >
@@ -257,7 +194,7 @@ export default function InfoBlock() {
           </div>
         </div>
         <MapWithNoSSR />
-        <ConfirmOrderList />
+        <OrderList />
       </div>
     </div>
   );

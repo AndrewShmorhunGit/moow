@@ -1,0 +1,19 @@
+// styles.scss
+
+.outer-div {
+  margin: 0;
+  padding: 5px 0;
+  justify-content: space-between;
+  display: flex;
+}
+
+.inner-div {
+  color: var(--black-500, #262626);
+  text-align: center;
+}
+
+.inner-div-nowrap {
+  @extend .inner-div;
+  white-space: nowrap;
+  font-weight: 500;
+}

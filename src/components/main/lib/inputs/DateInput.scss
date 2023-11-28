@@ -1,0 +1,33 @@
+.date-input-container {
+  display: flex;
+  flex-direction: column;
+  line-height: normal;
+}
+
+.date-input-label {
+  cursor: pointer;
+  color: var(--black-400, #5a5a5a);
+  font: 500 14px/18px Mulish, sans-serif;
+}
+
+.date-input-wrapper {
+  display: flex;
+  margin-top: 5px;
+  padding-right: 10px;
+  justify-content: space-between;
+  gap: 3px;
+}
+
+.date-input-field {
+  display: flex;
+  flex-grow: 1;
+  flex-basis: 0%;
+  flex-direction: column;
+}
+
+.date-input {
+  outline: none;
+  border: none;
+  color: var(--black-500, #262626);
+  font: 500 16px/20px Mulish, sans-serif;
+}

@@ -7,8 +7,9 @@ import React, {
   useCallback,
 } from "react";
 import { GoogleMap, Marker, DirectionsRenderer } from "@react-google-maps/api";
-import { useAppSelector } from "@/hooks/useAppDispatch";
+import { useAppDispatch, useAppSelector } from "@/hooks/useAppDispatch";
 import { createMarkersMap } from "@/utils/google";
+import { setOrder } from "@/app/redux/features/order/order.slice";
 
 const containerStyle = {
   width: "500px",
@@ -16,9 +17,22 @@ const containerStyle = {
 };
 
 export const Map: React.FC = () => {
+  const dispatch = useAppDispatch();
   const initialState = useAppSelector((state) => state.order);
 
-  const { orderLocations } = initialState;
+  const {
+    orderLocations,
+    distanceToStorage,
+    totalRouteDistance,
+    routeDistance,
+  } = initialState;
+
+  const [isRoutes, setRoutes] = useState({
+    distanceToStorage,
+    totalRouteDistance,
+    routeDistance,
+  });
+
   const markersMap: Map<
     string,
     google.maps.LatLng | google.maps.LatLngLiteral
@@ -26,6 +40,7 @@ export const Map: React.FC = () => {
 
   const [directionsResponse, setDirectionsResponse] =
     useState<google.maps.DirectionsResult | null>(null);
+
   const directionsService = useRef(new window.google.maps.DirectionsService());
 
   const [currentLocation, setCurrentLocation] = useState({ lat: 0, lng: 0 });
@@ -41,65 +56,39 @@ export const Map: React.FC = () => {
     }
   }, []);
 
-  const destination = {
-    /* your destination coordinates */
-    ...orderLocations[0].locationCoords,
-  };
-
-  const origin = {
-    /* your origin coordinates */
-    ...currentLocation,
-  };
-
-  // const distance =
-  //   window.google.maps.geometry.spherical.computeDistanceBetween(
-  //     new window.google.maps.LatLng(origin.lat, origin.lng),
-  //     new window.google.maps.LatLng(destination.lat, destination.lng)
-  //   ) / 1000;
-
-  // console.log(distance);
-
   useEffect(() => {
-    if (!origin || !destination) return;
-
-    directionsService.current.route(
-      {
-        origin: origin,
-        destination: destination,
-        travelMode: window.google.maps.TravelMode.DRIVING,
-      },
-      (result, status) => {
-        if (status === window.google.maps.DirectionsStatus.OK) {
-          setDirectionsResponse(result);
-        } else {
-          console.error(`error fetching directions ${result}`);
-        }
-      }
+    const { distanceToStorage, totalRouteDistance, routeDistance } = isRoutes;
+    dispatch(
+      setOrder({
+        ...initialState,
+        distanceToStorage,
+        totalRouteDistance,
+        routeDistance,
+      })
     );
-  }, []);
+  }, [isRoutes]);
 
   if (process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY === undefined) {
     throw new Error("Google maps API key is undefined!");
   }
 
   const locationMarkers = useMemo(() => {
-    return Array.from(markersMap.entries()).map(([id, coords]) => {
+    return Array.from(markersMap.entries()).map(([id, coords], index) => {
       if (coords.lat && coords.lng) {
-        return <Marker key={id} position={coords} label={id} />;
+        return <Marker key={id} position={coords} />;
       }
       return null;
     });
-  }, [markersMap]);
+  }, [orderLocations]);
 
   const validMarkers = locationMarkers.filter(
     (marker) => marker !== null
   ) as React.JSX.Element[];
 
   const calculateRoute = useCallback(() => {
-    if (Object.keys(currentLocation).length === 0 || validMarkers.length < 1)
-      return;
+    if (validMarkers.length < 2) return;
 
-    const waypoints = validMarkers.map((marker: any) => ({
+    const waypoints = validMarkers.map((marker: unknown) => ({
       location: marker.props.position,
       stopover: true,
     }));
@@ -107,7 +96,32 @@ export const Map: React.FC = () => {
       return;
     }
 
-    const destination = waypoints.pop().location;
+    const destination = waypoints.pop()?.location;
+
+    // Calculate distance from current location to the first marker
+    const firstDestination = validMarkers[0].props.position;
+    directionsService.current.route(
+      {
+        origin: currentLocation,
+        destination: firstDestination,
+        travelMode: google.maps.TravelMode.DRIVING,
+      },
+      (result, status) => {
+        if (status === google.maps.DirectionsStatus.OK && result) {
+          let storeDistance = 0;
+          result.routes[0].legs.forEach((leg) => {
+            storeDistance += leg.distance.value;
+          });
+          storeDistance = storeDistance / 1000;
+
+          setRoutes({ ...isRoutes, distanceToStorage: storeDistance });
+
+          console.log("Distance to first marker: ", storeDistance, "km");
+        } else {
+          console.error(`Error fetching distance to first marker`);
+        }
+      }
+    );
 
     directionsService.current.route(
       {
@@ -119,8 +133,25 @@ export const Map: React.FC = () => {
       (result, status) => {
         if (status === google.maps.DirectionsStatus.OK) {
           setDirectionsResponse(result);
+
+          // Calculate the total distance
+          let totalDistance = 0;
+          result.routes[0].legs.forEach((leg) => {
+            totalDistance += leg.distance.value;
+          });
+          totalDistance = totalDistance / 1000;
+          const routeDistance = totalDistance - initialState.distanceToStorage;
+          setRoutes({
+            ...isRoutes,
+            routeDistance,
+            totalRouteDistance: totalDistance,
+          });
+
+          console.log("Total distance: ", totalDistance, "km");
         } else {
-          console.error(`error fetching directions ${result}`);
+          console.error(
+            `error fetching directions ${result}, Status: ${status}`
+          );
         }
       }
     );
@@ -128,7 +159,7 @@ export const Map: React.FC = () => {
 
   useEffect(() => {
     calculateRoute();
-  }, [calculateRoute]);
+  }, [currentLocation, orderLocations]);
 
   return (
     <GoogleMap

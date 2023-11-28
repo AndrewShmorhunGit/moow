@@ -30,14 +30,29 @@ export function FeaturesSection() {
             </div>
           );
         })}
+
         {/* ... other feature items ... */}
       </div>
       <div className="additional-info">
-        <p className="info-text">
-          Here I am using Next.js but under the hood implemented standard
-          React.js fetching and state management approach.
+        <p className="feature-text" style={{ textAlign: "center" }}>
+          This application represents a cutting-edge blend of Google Maps API
+          integration and experimental AI technology to create an intuitive and
+          dynamic mapping experience. The core functionality revolves around the
+          Google Maps component, which is adeptly managed within Next framework,
+          React library using TypeScript. This providing users with real-time
+          geolocation services and route mapping.
         </p>
       </div>
+      {/* <div className="additional-info">
+        <p className="info-text">
+          This application represents a cutting-edge blend of Google Maps API
+          integration and experimental AI technology to create an intuitive and
+          dynamic mapping experience. The core functionality revolves around the
+          Google Maps component, which is adeptly managed within Next framework,
+          React library using TypeScript. This providing users with real-time
+          geolocation services and route mapping.
+        </p>
+      </div> */}
     </section>
   );
 }

@@ -1,12 +1,9 @@
 "use client";
-
-import * as React from "react";
-// import dynamic from "next/dynamic";
-import { InitialLocationForm } from "./route/InitialLocationForm";
-import { LocationForm } from "./route/LocationForm";
+import "./MainComponent.scss";
+import { InitialLocationForm } from "./location/InitialLocationForm";
+import { LocationForm } from "./location/LocationForm";
 import { Header } from "./header/Header";
 import { Footer } from "./footer/Footer";
-// import { ConfirmOrderList } from "./order/ConfirmOrderList";
 import AboutCargo from "./cargo/AboutCargo";
 import { ClientContacts } from "./contacts/ClientContacts";
 import { PaymentMethod } from "./payment/PaymentMethod";
@@ -17,11 +14,12 @@ import { useAppDispatch, useAppSelector } from "@/hooks/useAppDispatch";
 import { trimArray } from "@/utils/functions";
 import { setOrder } from "@/app/redux/features/order/order.slice";
 import { OrderLocation } from "@/types";
+import { useState, useEffect } from "react";
 
 export function MainComponent() {
-  const [isClient, setIsClient] = React.useState(false);
+  const [isClient, setIsClient] = useState(false);
 
-  React.useEffect(() => {
+  useEffect(() => {
     setIsClient(true);
   }, []);
 
@@ -37,7 +35,6 @@ export function MainComponent() {
       address: "",
       locationCoords: { lat: 0, lng: 0 },
       workingHours: 0,
-      distance: 0,
     };
     const newOrderLocations = [...orderLocations, newLocation];
 
@@ -57,10 +54,9 @@ export function MainComponent() {
       <div
         style={{
           backgroundColor: "#FFF",
-          width: "1240px",
           display: "flex",
-
           flexDirection: "column",
+          margin: "0 auto",
         }}
       >
         <Header />
@@ -71,30 +67,23 @@ export function MainComponent() {
             alignSelf: "center",
             marginTop: "15px",
             whiteSpace: "nowrap",
-
             font: "700 24px/30px Mulish, sans-serif ",
           }}
         >
           Замовити
         </div>
-
         <div
           style={{
             marginTop: "15px",
           }}
         >
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "1fr 540px",
-            }}
-          >
+          <div className="grid-container">
             <div
               style={{
                 display: "flex",
                 flexDirection: "column",
                 lineHeight: "normal",
-                padding: "0 1.6rem",
+                // padding: "0 1.6rem",
                 marginLeft: "0px",
               }}
             >
@@ -111,8 +100,6 @@ export function MainComponent() {
                   style={{
                     color: "var(--purple-600, #665CD1)",
                     alignSelf: "stretch",
-                    marginRight: "-20px",
-
                     font: "700 19px/24px Mulish, sans-serif ",
                   }}
                 >
@@ -159,8 +146,7 @@ export function MainComponent() {
                     display: "flex",
                     height: "1px",
                     flexDirection: "column",
-
-                    margin: "20px -20px 0 0",
+                    margin: "20px 0 0 0",
                   }}
                 />
                 <AboutCargo />
@@ -180,11 +166,12 @@ export function MainComponent() {
             width: "100%",
             borderTop: "1px grey solid",
             flexDirection: "column",
-
             padding: "0 42px",
           }}
         >
-          <MoowLogo size={124} />
+          <div className="footer-logo">
+            <MoowLogo size={124} />
+          </div>
           <Footer />
         </div>
       </div>

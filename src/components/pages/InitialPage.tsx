@@ -3,11 +3,11 @@ import Navigation from "@/components/navigation/Navigation";
 import { FeaturesSection } from "@/components/sections/features/FeaturesSection";
 import { HeroSection } from "@/components/sections/hero/HeroSection";
 
-export default function Home() {
+export default function InitialPage({ userId }: { userId: string | null }) {
   return (
     <main>
       <Navigation />
-      <HeroSection />
+      <HeroSection userId={userId} />
       <FeaturesSection />
       <Footer />
     </main>
