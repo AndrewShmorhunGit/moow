@@ -10,7 +10,7 @@ export const HeroSection = ({ userId }: { userId: string | null }) => {
       <div className="hero-container">
         <Link
           className="hero-twitter-link"
-          href={"siteConfig.links.twitter"}
+          href={"https://github.com/AndrewShmorhunGit/moow"}
           target="_blank"
           rel="noopener noreferrer"
         >
