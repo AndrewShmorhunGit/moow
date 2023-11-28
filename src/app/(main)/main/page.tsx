@@ -1,7 +1,7 @@
 "use client";
 import { MainComponent } from "@/components/main/MainComponent";
 import Script from "next/script";
-import "@/utils/google/mapInit";
+// import "@/utils/google/mapInit";
 
 export default function Main() {
   return (

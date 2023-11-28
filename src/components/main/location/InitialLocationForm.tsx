@@ -62,7 +62,7 @@ export function InitialLocationForm() {
   }, [isForm]);
 
   return (
-    <form className="initial-location-form">
+    <div className="initial-location-form">
       <div className="location-title">Точка А</div>
       <div>
         <div className="location-details">
@@ -127,6 +127,6 @@ export function InitialLocationForm() {
           </div>
         </div>
       </div>
-    </form>
+    </div>
   );
 }

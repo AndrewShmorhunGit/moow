@@ -89,7 +89,7 @@ export function AutocompleteInput({ id: locationId }: { id: string }) {
                 <Spinner />
               </div>
             )}
-            {suggestions.map((suggestion, index) => {
+            {suggestions.map((suggestion) => {
               const className = suggestion.active
                 ? "suggestion-item--active"
                 : "suggestion-item";
@@ -98,15 +98,14 @@ export function AutocompleteInput({ id: locationId }: { id: string }) {
                 ? { backgroundColor: "#fafafa", cursor: "pointer" }
                 : { backgroundColor: "#ffffff", cursor: "pointer" };
               return (
-                <div key={index}>
-                  <div
-                    {...getSuggestionItemProps(suggestion, {
-                      className,
-                      style,
-                    })}
-                  >
-                    <span>{suggestion.description}</span>
-                  </div>
+                <div
+                  {...getSuggestionItemProps(suggestion, {
+                    className,
+                    style,
+                    key: suggestion,
+                  })}
+                >
+                  <span>{suggestion.description}</span>
                 </div>
               );
             })}
