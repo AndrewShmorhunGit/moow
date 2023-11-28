@@ -1,5 +1,34 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+## Download
+
+- Download app folder from the repository
+
+## Install the dependencies
+
+- In the app root folder
+
+```bash
+npm i
+```
+
+## ENV example
+
+- To start add your keys
+
+- [Clerk](https://clerk.com/)
+- [Google Maps API](https://console.cloud.google.com/apis)
+
+```bash
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=CLERK_PUBLISHABLE_KEY
+CLERK_SECRET_KEY=CLERK_SECRET_KEY
+NEXT_PUBLIC_CLERK_SIGN_IN_URL=/login
+NEXT_PUBLIC_CLERK_SIGN_UP_URL=/register
+NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL=/main
+NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL=/auth
+NEXT_PUBLIC_GOOGLE_MAPS_API_KEY=GOOGLE_MAPS_API_KEY
+```
+
 ## Getting Started
 
 First, run the development server:
