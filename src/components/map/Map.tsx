@@ -65,7 +65,7 @@ export const Map: React.FC = () => {
       }
       return null;
     });
-  }, [orderLocations]);
+  }, [orderLocations, markersMap]);
 
   const validMarkers = locationMarkers.filter(
     (marker) => marker !== null
