@@ -2,6 +2,7 @@
 import dynamic from "next/dynamic";
 import "./InfoBlock.scss";
 import { OrderList } from "../order/OrderList";
+
 const MapWithNoSSR = dynamic(() => import("@/components/map/Map"), {
   ssr: false,
 });
@@ -193,7 +194,9 @@ export default function InfoBlock() {
             </div>
           </div>
         </div>
+
         <MapWithNoSSR />
+
         <OrderList />
       </div>
     </div>

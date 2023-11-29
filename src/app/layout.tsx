@@ -1,8 +1,12 @@
 import { AppContainer } from "@/components/app/AppContainer";
 import { AppProviders } from "@/components/app/AppProviders";
 import type { Metadata } from "next";
-import Script from "next/script";
 
+declare global {
+  interface Window {
+    mapInit: () => void;
+  }
+}
 export const metadata: Metadata = {
   title: "Application Title",
   description: "Authentication with clerk",

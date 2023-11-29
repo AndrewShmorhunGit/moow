@@ -54,10 +54,6 @@ export const Map: React.FC = () => {
     }
   }, []);
 
-  if (process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY === undefined) {
-    throw new Error("Google maps API key is undefined!");
-  }
-
   const locationMarkers = useMemo(() => {
     return Array.from(markersMap.entries()).map(([id, coords], index) => {
       if (coords.lat && coords.lng) {
@@ -70,6 +66,8 @@ export const Map: React.FC = () => {
   const validMarkers = locationMarkers.filter(
     (marker) => marker !== null
   ) as React.JSX.Element[];
+
+  // ...
 
   const calculateRoute = useCallback(() => {
     if (validMarkers.length < 2) return;
@@ -85,11 +83,10 @@ export const Map: React.FC = () => {
     const destination = waypoints.pop()?.location;
 
     // Calculate distance from current location to the first marker
-    const firstDestination = validMarkers[0].props.position;
     directionsService.current.route(
       {
         origin: currentLocation,
-        destination: firstDestination,
+        destination: destination,
         travelMode: google.maps.TravelMode.DRIVING,
       },
       (result, status) => {
@@ -99,7 +96,7 @@ export const Map: React.FC = () => {
             if (leg.distance) {
               storeDistance += leg.distance.value;
             } else {
-              console.log("leg:", leg);
+              console.error("leg:", leg);
             }
           });
           storeDistance = storeDistance / 1000;
@@ -109,7 +106,7 @@ export const Map: React.FC = () => {
             console.log("Distance to first marker: ", storeDistance, "km");
           }
         } else {
-          console.error(`Error fetching distance to first marker`);
+          console.error("Error fetching distance to first marker:", status);
         }
       }
     );
@@ -139,13 +136,13 @@ export const Map: React.FC = () => {
             console.log("Total distance: ", totalDistance, "km");
           }
         } else {
-          console.error(
-            `error fetching directions ${result}, Status: ${status}`
-          );
+          console.error("Error fetching directions:", status);
         }
       }
     );
   }, [currentLocation, validMarkers]);
+
+  // ...
 
   useEffect(() => {
     dispatch(
@@ -153,7 +150,6 @@ export const Map: React.FC = () => {
         ...initialState,
         distanceToStorage: isStorageDistance,
         totalDistance: isTotalDistance,
-        // routeDistance: isTotalDistance - ,
       })
     );
   }, [isTotalDistance, isStorageDistance]);
