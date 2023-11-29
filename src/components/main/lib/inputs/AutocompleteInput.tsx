@@ -98,14 +98,16 @@ export function AutocompleteInput({ id: locationId }: { id: string }) {
                 ? { backgroundColor: "#fafafa", cursor: "pointer" }
                 : { backgroundColor: "#ffffff", cursor: "pointer" };
               return (
-                <div
-                  {...getSuggestionItemProps(suggestion, {
-                    className,
-                    style,
-                    key: index + "" + className,
-                  })}
-                >
-                  <span>{suggestion.description}</span>
+                <div key={index + "" + className}>
+                  <div
+                    {...getSuggestionItemProps(suggestion, {
+                      className,
+                      style,
+                      key: index + "" + className,
+                    })}
+                  >
+                    <span>{suggestion.description}</span>
+                  </div>
                 </div>
               );
             })}
